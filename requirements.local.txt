@@ -1,0 +1,33 @@
+# Local development requirements (install these on your machine)
+# Run: pip install -r requirements.local.txt
+
+# ChromaDB client
+chromadb==0.4.24
+
+# Embeddings and ML
+sentence-transformers==2.7.0
+transformers==4.44.2
+torch==2.4.1
+tokenizers==0.20.3
+
+# Data processing
+polars==1.14.0
+pandas==2.2.3
+numpy==1.26.4
+matplotlib==3.9.2
+seaborn==0.13.2
+wordcloud==1.9.3
+
+# Jupyter for development
+jupyter==1.1.1
+jupyterlab==4.3.5
+ipykernel==6.29.5
+
+# API framework (if needed)
+fastapi==0.115.5
+uvicorn==0.32.1
+pydantic==2.9.2
+
+# Utilities
+python-dotenv==1.0.1
+tqdm==4.67.1

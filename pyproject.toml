@@ -1,0 +1,16 @@
+[project]
+name = "semantic-search"
+version = "0.1.0"
+description = "Semantic search project with TensorFlow 2.18"
+requires-python = ">=3.12"
+dependencies = [
+    "tensorflow==2.18.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv]
+dev-dependencies = []
+
