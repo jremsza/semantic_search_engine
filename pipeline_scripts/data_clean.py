@@ -1,48 +1,22 @@
-import json
+import sys
 import os
-import re
 
+# Add src directory to path to import utils
+sys.path.append(os.path.join(os.path.dirname(__file__), '..', 'src'))
+
+from utils import (
+    basic_clean, 
+    advanced_clean, 
+    read_jsonl, 
+    write_jsonl, 
+    get_data_path,
+    MIN_CHAR_LENGTH
+)
 
 # Configuration
 # -----------------------------------------------------------------------------
-
-# Input file 
-INPUT_FILE = os.path.join("data", "ds_corpus.jsonl")
-
-# Output file 
-OUTPUT_FILE = os.path.join("data", "ds_corpus_clean.jsonl")
-
-# Set min char length
-MIN_CHAR_LENGTH = 125
-
-# Advanced cleaning parameters
-# -----------------------------------------------------------------------------
-def advanced_clean(text: str) -> list[str]:
-    """
-    Cleans Wikipedia text and splits it into meaningful paragraph chunks.
-    
-    Args:
-        text: The raw text content of a Wikipedia article.
-        
-    Returns:
-        A list of cleaned text chunks.
-    """
-    # Remove headers
-    text = re.sub(r'==.?==+', '', text)
-
-    # Remove extra lines
-    text = re.sub(r'\n{2,}', '\n', text)
-
-    # Split into chunks
-    chunks = text.split('\n')
-
-    # Filter for chunks with minimum length
-    final_chunks = [
-        chunk.strip() for chunk in chunks 
-        if len(chunk.strip()) >= MIN_CHAR_LENGTH
-    ]
-
-    return final_chunks
+INPUT_FILE = get_data_path("ds_corpus.jsonl")
+OUTPUT_FILE = get_data_path("ds_corpus_clean.jsonl")
 
 # Main Function
 # -----------------------------------------------------------------------------
@@ -52,31 +26,27 @@ def main():
     Main function to clean the input file and save the output to a new file.
     """
     
-    try:
-        with open(INPUT_FILE, 'r', encoding='utf-8') as f:
-            lines = f.readlines()
-    
-    except FileNotFoundError:
-        print(f"Error: Input file {INPUT_FILE} not found.")
+    # Read the input data
+    data = read_jsonl(INPUT_FILE)
+    if not data:
         return
 
-    print(f"Processing {len(lines)} docs...")
+    print(f"Processing {len(data)} docs...")
     processed_docs = []
 
-    for line in lines:
-        data = json.loads(line)
-        title = data.get('title', '')
-        text = data.get('text', '')
+    for record in data:
+        title = record.get('title', '')
+        text = record.get('text', '')
 
-        text_chunks = advanced_clean(text)
+        text_chunks = advanced_clean(text, MIN_CHAR_LENGTH)
         
         # Create a new record for each chunk, linking back to the original article
         for i, chunk in enumerate(text_chunks):
             chunk_record = {
-                "id": f"{data.get('id')}_{i}", # Create a unique ID for each chunk
+                "id": f"{record.get('id')}_{i}", # Create a unique ID for each chunk
                 "title": title,
                 "text": chunk,
-                "url": data.get("url")
+                "url": record.get("url")
             }
             processed_docs.append(chunk_record)
 
@@ -84,13 +54,10 @@ def main():
 
     # Write the processed chunks to a new .jsonl file.
     print(f"\nWriting {len(processed_docs)} processed chunks to '{OUTPUT_FILE}'...")
-    try:
-        with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
-            for record in processed_docs:
-                f.write(json.dumps(record) + '\n')
+    if write_jsonl(processed_docs, OUTPUT_FILE):
         print("SUCCESS: Data cleaning and chunking complete.")
-    except Exception as e:
-        print(f"ERROR: Could not write to file. Reason: {e}")
+    else:
+        print("ERROR: Could not write to file.")
 
 if __name__ == "__main__":
     main()

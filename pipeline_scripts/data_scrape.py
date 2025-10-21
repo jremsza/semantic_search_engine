@@ -1,6 +1,5 @@
 import wikipediaapi
 import os
-import re
 import time
 import json
 
@@ -23,9 +22,8 @@ TOPICS = [
     "Mean squared error", "Mean absolute error", "SQL", "NoSQL", "Database", "Relational database", "Key-value store", "Document-oriented database", "Vector database",
     "Data warehouse", "Data lake", "Data pipeline", "Data mart", "Online analytical processing", "Online transaction processing", "Extract, transform, load", "Stemming",
     "tf–idf", "Word2vec", "GloVe", "BERT (language model)", "Generative pre-trained transformer", "XLNet","Lemmatization", "Large language model", "Knowledge graph embedding", "Topic models",
-    "Knowledge graph", "Named-entity recognition"
+    "Knowledge graph", "Named-entity recognition", "Bag-of-words model", "Part-of-speech tagging", "Dijkstra's algorithm"
     ]
-
 # Output directory and filename.
 OUTPUT_DIR = "data"
 OUTPUT_FILENAME = "ds_corpus.jsonl"
@@ -35,14 +33,6 @@ wiki_api = wikipediaapi.Wikipedia(
     user_agent='msds-498_Project/1.0 (jremsza2@gmail.com)',
     language='en'
 )
-
-# Data Cleaning
-# -----------------------------------------------------------------------------
-def clean_text(text):
-    
-    text = re.sub(r'\[\d+\]', '', text)
-    text = re.sub(r'\n+', '\n', text)
-    return text.strip()
 
 # Main Function
 # -----------------------------------------------------------------------------
@@ -65,7 +55,7 @@ def main():
             "id": topic.replace(" ", "_"),
             "url": page.canonicalurl,
             "title": page.title,
-            "text": clean_text(page.text)
+            "text": page.text  # Raw text - no cleaning
         }
         corpus.append(article)
 
@@ -84,6 +74,7 @@ def main():
             for article in corpus:
                 f.write(json.dumps(article) + '\n')
         print(f"Successfully wrote to {output_path}")
+        print("Data scraping complete.")
     except Exception as e:
         print(f"Error writing to {output_path}: {e}")
 

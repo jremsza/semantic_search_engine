@@ -8,7 +8,7 @@ echo "🚀 Starting ChromaDB server..."
 mkdir -p data/chroma
 
 # Start ChromaDB using the simple compose file
-docker-compose -f docker-compose.simple.yml up -d
+docker-compose -f docker-compose.yml up -d
 
 # Wait for ChromaDB to be ready
 echo "⏳ Waiting for ChromaDB to be ready..."
