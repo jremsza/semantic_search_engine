@@ -131,14 +131,21 @@ def ensure_dir(directory: str) -> None:
 def get_data_path(filename: str) -> str:
     """
     Gets the full path for a file in the data directory.
+    Automatically detects project root by looking for this file (utils.py)
+    to work regardless of current working directory.
     
     Args:
         filename: Name of the file
         
     Returns:
-        Full path to the file
+        Full absolute path to the file
     """
-    return os.path.join("data", filename)
+    # Get the directory where this utils.py file is located (src/)
+    utils_dir = os.path.dirname(os.path.abspath(__file__))
+    # Go up one level to project root
+    project_root = os.path.dirname(utils_dir)
+    # Return absolute path to data/filename
+    return os.path.join(project_root, "data", filename)
 
 
 # =============================================================================
@@ -153,7 +160,7 @@ EMBEDDING_DIMENSION = 384
 # File paths
 RAW_DATA_FILE = "ds_corpus.jsonl"
 CLEAN_DATA_FILE = "ds_corpus_clean.jsonl"
-EMBEDDINGS_FILE = "embeddings.pkl"
+EMBEDDINGS_FILE = "models/embeddings.pkl"
 
 # Text processing
 MIN_CHAR_LENGTH = 150

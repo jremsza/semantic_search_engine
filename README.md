@@ -31,7 +31,7 @@ Go to `http://localhost:8501`
 
 ## How to Use
 
-1. **Type your question** in the search box (e.g., "What is attention mechanism?")
+1. **Type your question** in the search box (e.g., "What is a transformer?")
 2. **Click Search** to find relevant documents
 3. **View results** with similarity scores and expandable content
 

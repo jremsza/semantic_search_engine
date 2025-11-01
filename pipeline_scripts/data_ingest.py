@@ -3,7 +3,7 @@ import chromadb
 from tqdm import tqdm
 
 # --- Configuration ---
-INPUT_PATH = "data/embeddings.pkl"
+INPUT_PATH = "models/embeddings.pkl"
 CHROMA_HOST = "localhost"
 CHROMA_PORT = 8000
 COLLECTION_NAME = 'semantic_search_engine'
@@ -66,7 +66,6 @@ def data_ingest():
 
     try:
         # 3. Create or get the collection
-        # A collection is like a table in a traditional database.
         print(f"Creating or getting collection {COLLECTION_NAME}...")
         collection = client.get_or_create_collection(
             name=COLLECTION_NAME,
@@ -75,8 +74,7 @@ def data_ingest():
         print(f"Collection {COLLECTION_NAME} created or retrieved.")
         
         # 4. Add the data to the collection
-        # ChromaDB's .add() method is highly optimized for this.
-        # We convert embeddings to a list as it's the expected format.
+        # Convert embeddings to a list as it's the expected format.
 
         print(f"Adding {len(ids)} documents to {COLLECTION_NAME}...(This may take a while)")
         
@@ -107,7 +105,7 @@ def data_ingest():
         print(f"Failed to ingest data: {e}")
         return
     finally:
-        # Note: ChromaDB HttpClient doesn't require explicit closing
+        # ChromaDB HttpClient doesn't require explicit closing
         print("Connection handling complete.")
 
 if __name__ == "__main__":

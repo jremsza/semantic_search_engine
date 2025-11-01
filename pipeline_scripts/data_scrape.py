@@ -6,23 +6,25 @@ import json
 # Configuration
 # -----------------------------------------------------------------------------
 TOPICS = [
-    "Artificial intelligence", "Machine learning", "Data science", "Deep learning", "Artificial Neural Network", "Feature learning",
+    "Artificial intelligence", "Machine learning", "Data science", "Deep learning", "Artificial Neural Network", "Feature learning", "Loss function",
     "Convolutional Neural Network", "Recurrent Neural Network", "LSTM", "Gated recurrent unit", "Transformer (deep learning architecture)", "Rectified linear unit",
-    "Attention mechanism", "Generative Adversarial Network", "Autoencoder", "Neural network", "Supervised learning", "Unsupervised learning", 
-    "Reinforcement learning", "Linear programming", "Integer programming", "Linear regression", "Logistic regression", "Support vector machine", 
+    "Attention mechanism", "Generative Adversarial Network", "Autoencoder", "Neural network (machine learning)", "Supervised learning", "Unsupervised learning", "Weak supervision",
+    "Reinforcement learning", "Linear programming", "Integer programming", "Linear regression", "Logistic regression", "Support vector machine", "Feedforward neural network", "Backpropagation",
     "Decision tree", "Markov chain", "Random forest", "Gradient boosting", "K-means clustering", "Principal component analysis", "Dimensionality reduction", "TSNE", 
     "Natural language processing", "Computer vision", "Overfitting", "Cross-validation (statistics)", "Partial least squares", "Confusion matrix", "Bootstrapping (statistics)",
     "Precision and recall", "Accuracy and precision", "Receiver operating characteristic", "Data engineering", "Latent Dirichlet allocation", "Out-of-bag error", "Naive Bayes classifier",
     "Bias-variance tradeoff", "Hyperparameter tuning", "Feature engineering", "Data mining", "Data visualization", "Singular value decomposition", "Eigenvalues", "Eigenvectors",
     "Big data", "TensorFlow", "Scikit-learn", "Pandas (software)", "NumPy", "R (programming language)", "Python (programming language)", "Z-score", "Word embedding",
     "Lasso regression", "Ridge regression", "Elastic net regression", "XGBoost", "AdaBoost", "Bootstrap aggregating", "Confidence interval", "p-value", "Statistical hypothesis test",
-    "Boosting", "Ensemble learning", "Model evaluation", "F-test", "Student's t-test", "ANOVA", "Chi-square test", "Central limit theorem", "Boosting (machine learning)",
+    "Ensemble learning", "Model evaluation", "F-test", "Student's t-test", "ANOVA", "Chi-square test", "Central limit theorem", "Boosting (machine learning)",
     "Gradient descent", "Root mean square deviation", "Collinearity", "Multicollinearity", "Bayes' theorem", "Data wrangling", "Graph database", "Snowflake schema",
     "Mean absolute percentage error", "Coefficient of determination", "Akaike information criterion", "Bayesian information criterion", "Cross-entropy", "Hierarchical clustering", "DBSCAN",
     "Mean squared error", "Mean absolute error", "SQL", "NoSQL", "Database", "Relational database", "Key-value store", "Document-oriented database", "Vector database",
     "Data warehouse", "Data lake", "Data pipeline", "Data mart", "Online analytical processing", "Online transaction processing", "Extract, transform, load", "Stemming",
     "tf–idf", "Word2vec", "GloVe", "BERT (language model)", "Generative pre-trained transformer", "XLNet","Lemmatization", "Large language model", "Knowledge graph embedding", "Topic models",
-    "Knowledge graph", "Named-entity recognition", "Bag-of-words model", "Part-of-speech tagging", "Dijkstra's algorithm"
+    "Knowledge graph", "Named-entity recognition", "Bag-of-words model", "Part-of-speech tagging", "Dijkstra's algorithm", "Stochastic gradient descent", "Multilayer perceptron",
+    "Polynomial regression", "Overfitting", "Learning curve (machine learning)", "Cross-validation (statistics)", "Regularization (mathematics)", "Early stopping", "Training, validation, and test data sets",
+    "Data preprocessing", "Data transformation (statistics)", "Batch normalization"
     ]
 # Output directory and filename.
 OUTPUT_DIR = "data"

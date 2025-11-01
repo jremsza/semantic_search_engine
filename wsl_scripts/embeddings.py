@@ -1,4 +1,5 @@
 import json
+import os
 import pickle
 import numpy as np
 import torch
@@ -8,7 +9,7 @@ from transformers import AutoTokenizer, AutoModel
 # --- Configuration ---
 # Define the input and output paths
 INPUT_PATH = "data/ds_corpus_clean.jsonl"
-OUTPUT_PATH = "data/embeddings.pkl"
+OUTPUT_PATH = "models/embeddings.pkl"
 
 # Define the model to use
 MODEL_NAME = 'sentence-transformers/all-MiniLM-L6-v2'
@@ -71,8 +72,7 @@ def create_embeddings(input_path, output_path):
     print(f"Found {len(text_to_embed)} documents to embed.")
     print("-" * 50)
     print("Starting the embedding process...")
-    print("-" * 50)
-
+ 
     # --- Embedding Generation ---
     print("-" * 50)
     print(f"Generating embeddings in batches of size {BATCH_SIZE}...")
@@ -117,6 +117,9 @@ def create_embeddings(input_path, output_path):
         'documents': text_to_embed  # Assuming 'texts_to_embed' holds your original text
     }
 
+    # Create models directory if it doesn't exist
+    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    
     print(f"Saving packaged data to {output_path}...")
 
     with open(output_path, 'wb') as f_out:

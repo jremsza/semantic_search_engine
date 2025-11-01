@@ -2,3 +2,10 @@
 wsl_venv/
 __pycache__/
 *.py[cod]
+data/
+venv_wsl/
+*.pkl
+models/
+notebooks/.ipynb_checkpoints/
+*.joblib
+.python-version
